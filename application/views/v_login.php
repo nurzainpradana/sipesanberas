@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login - Aplikasi Perpustkaan SMAN 1 Cibitung</title>
+  <title>Login - SI Pesan Beras</title>
   <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/css/bootstrap.css' ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/css/custom.css' ?>">
 
@@ -16,15 +16,11 @@
 
     <br/><br/>
 
-    <h3 class="font-weight-normal text-center text-white">APLIKASI PERPUSTAKAAN</h3>
-    <h2 class="font-weight-normal text-center text-white mb-4"><b>SMAN 1 CIBITUNG</b></h2>
-    <div class="gambar text-center">
-<img class="gambarlogin" src="assets/img/smaci1.png" height="auto" width="110px" style="">
-</div>
+    
       <br>
 
 
-    <div class="col-md-4 offset-md-4">
+    <div class="col-md-5 offset-md-4">
       <div class="card mb-5">
         <div class="card-body">
           <?php 
@@ -38,7 +34,12 @@
             }
           } 
           ?>
-          
+          <h3 class="font-weight-normal text-center text">Sistem Informasi Pesan Beras
+          </h3>
+          <h2 class="font-weight-normal text-center text mb-4"><b>Sriwijaya</b></h2>
+          <div class="gambar text-center">
+            <img class="gambarlogin" src="assets/img/smaci1.png" height="auto" width="110px" style="">
+          </div>
           <h4 class="font-weight text-center mb-3 mt-0">LOGIN</h4>
           <div class="text-center">
 
