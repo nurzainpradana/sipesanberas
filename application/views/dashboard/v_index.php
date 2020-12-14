@@ -1,26 +1,5 @@
 
-  <body class="goto-here">
-		<div class="py-1 bg-black">
-    	<div class="container">
-    		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-	    		<div class="col-lg-12 d-block">
-		    		<div class="row d-flex">
-		    			<div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-						    <span class="text">+ 1235 2355 98</span>
-					    </div>
-					    <div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text">youremail@email.com</span>
-					    </div>
-					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
-					    </div>
-				    </div>
-			    </div>
-		    </div>
-		  </div>
-    </div>
+
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
 	      <a class="navbar-brand" href="index.html">Toko Beras Sriwijaya</a>
@@ -100,11 +79,11 @@
           <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services p-4 py-md-5">
               <div class="icon d-flex justify-content-center align-items-center mb-4">
-            		<span class="flaticon-bag"></span>
+			  <img class="img-fluid mb-1" width="85" src="<?php echo base_url().'assets/images/quality.svg'?>" alt="Colorlib Template">
               </div>
               <div class="media-body">
-                <h3 class="heading">Free Shipping</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <h3 class="heading">Kualitas Terbaik</h3>
+                <p>Menyediakan produk – produk hasil pertanian yang telah diseleksi dengan ketat dari sumber – sumber alam pilihan terbaik.</p>
               </div>
             </div>      
           </div>
@@ -115,18 +94,18 @@
               </div>
               <div class="media-body">
                 <h3 class="heading">Support Customer</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <p>Kami akan memberikan pengalaman terbaik dalam memesan beras secara online.</p>
               </div>
             </div>    
           </div>
           <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services p-4 py-md-5">
               <div class="icon d-flex justify-content-center align-items-center mb-4">
-            		<span class="flaticon-payment-security"></span>
+			  <img class="img-fluid mb-1" width="85" src="<?php echo base_url().'assets/images/best-price.svg'?>" alt="Colorlib Template">
               </div>
               <div class="media-body">
-                <h3 class="heading">Secure Payments</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <h3 class="heading">Harga Terbaik</h3>
+                <p>Kami semaksimal mungkinemberikan harga terbaik di setiap kesempatan.</p>
               </div>
             </div>      
           </div>
@@ -498,10 +477,10 @@
         		<div class="services-flow">
         			<div class="services-2 p-4 d-flex ftco-animate">
         				<div class="icon">
-        					<span class="flaticon-bag"></span>
+        					<span class="flaticon-quality"></span>
         				</div>
         				<div class="text">
-	        				<h3>Free Shipping</h3>
+	        				<h3> Shipping</h3>
 	        				<p class="mb-0">Separated they live in. A small river named Duden flows</p>
         				</div>
         			</div>
@@ -628,35 +607,35 @@
     	<div class="container-fluid px-0">
     		<div class="row no-gutters">
 					<div class="col-md-4 col-lg-2 ftco-animate">
-						<a href="<?php echo base_url().'assets/images/gallery-1.jpg'?>" class="gallery image-popup img d-flex align-items-center" style="background-image: <?php echo base_url().'assets/images/gallery-1.jpg'?>;">
+						<a href="<?php echo base_url().'assets/images/gallery-1.jpg'?>" class="gallery image-popup img d-flex align-items-center" style="background-image: url(<?php echo base_url().'assets/images/gallery-1.jpg'?>);">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>
 						</a>
 					</div>
 					<div class="col-md-4 col-lg-2 ftco-animate">
-						<a href="<?php echo base_url().'assets/images/gallery-2.jpg'?>" class="gallery image-popup img d-flex align-items-center" style="background-image: <?php echo base_url().'assets/images/gallery-2.jpg'?>;">
+						<a href="<?php echo base_url().'assets/images/gallery-2.jpg'?>" class="gallery image-popup img d-flex align-items-center" style="background-image: url(<?php echo base_url().'assets/images/gallery-2.jpg'?>);">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>
 						</a>
 					</div>
 					<div class="col-md-4 col-lg-2 ftco-animate">
-						<a href="<?php echo base_url().'assets/images/gallery-3.jpg'?>" class="gallery image-popup img d-flex align-items-center" style="background-image: <?php echo base_url().'assets/images/gallery-3.jpg'?>;">
+						<a href="<?php echo base_url().'assets/images/gallery-3.jpg'?>" class="gallery image-popup img d-flex align-items-center" style="background-image: url(<?php echo base_url().'assets/images/gallery-3.jpg'?>);">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>
 						</a>
 					</div>
 					<div class="col-md-4 col-lg-2 ftco-animate">
-						<a href="<?php echo base_url().'assets/images/gallery-4.jpg'?>" class="gallery image-popup img d-flex align-items-center" style="background-image: <?php echo base_url().'assets/images/gallery-4.jpg'?>;">
+						<a href="<?php echo base_url().'assets/images/gallery-4.jpg'?>" class="gallery image-popup img d-flex align-items-center" style="background-image: url(<?php echo base_url().'assets/images/gallery-4.jpg'?>);">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>
 						</a>
 					</div>
 					<div class="col-md-4 col-lg-2 ftco-animate">
-						<a href="<?php echo base_url().'assets/images/gallery-5.jpg'?>" class="gallery image-popup img d-flex align-items-center" style="background-image: <?php echo base_url().'assets/images/gallery-5.jpg'?>;">
+						<a href="<?php echo base_url().'assets/images/gallery-5.jpg'?>" class="gallery image-popup img d-flex align-items-center" style="background-image: url(<?php echo base_url().'assets/images/gallery-5.jpg'?>);">
 							<div class="icon mb-4 d-flex align-items-center justify-content-center">
     						<span class="icon-instagram"></span>
     					</div>
@@ -685,7 +664,7 @@
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Minishop</h2>
+              <h2 class="ftco-heading-2">Toko Beras Sriwijaya</h2>
               <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
