@@ -10,7 +10,13 @@ class Dashboard extends CI_Controller {
 
 	public function index(){
 		$this->load->view('dashboard/v_header');
-		$this->load->view('dashboard/v_index');
+		$this->load->view('dashboard/v_beranda');
+		$this->load->view('dashboard/v_footer');
+	}
+
+	public function belanja(){
+		$this->load->view('dashboard/v_header');
+		$this->load->view('dashboard/v_belanja');
 		$this->load->view('dashboard/v_footer');
 	}
 
