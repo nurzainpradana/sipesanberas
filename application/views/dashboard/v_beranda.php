@@ -10,7 +10,7 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active"><a href="<?php echo base_url(); ?>" class="nav-link">Beranda</a></li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">Belanja</a></li>
+	          <li class="nav-item"><a href="<?php echo base_url().'dashboard/belanja'; ?>" class="nav-link">Belanja</a></li>
 			  <li class="nav-item"><a href="blog.html" class="nav-link">Transaksi</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Tentang Kami</a></li>
 	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>

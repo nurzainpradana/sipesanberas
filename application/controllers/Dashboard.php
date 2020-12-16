@@ -15,8 +15,9 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function belanja(){
+		$data['produk'] = $this->m_data->get_data('tb_produk')->result();
 		$this->load->view('dashboard/v_header');
-		$this->load->view('dashboard/v_belanja');
+		$this->load->view('dashboard/v_belanja', $data);
 		$this->load->view('dashboard/v_footer');
 	}
 
