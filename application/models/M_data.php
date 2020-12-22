@@ -8,9 +8,18 @@ class M_data extends CI_Model{
 	
 	// FUNGSI CRUD
 	// fungsi untuk mengambil data dari database
+	function get_data_pagination($limit, $start, $table){
+		return $this->db->get($table, $limit, $start);
+	}
+
 	function get_data($table){
 		return $this->db->get($table);
 	}
+
+	function get_data_where($where, $table){
+		return $this->db->get($table, $where);
+	}
+	
 
 	// fungsi untuk menginput data ke database
 	function insert_data($data,$table){

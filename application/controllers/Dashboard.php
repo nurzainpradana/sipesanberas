@@ -9,15 +9,42 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function index(){
+		$data['segment'] = $this->uri->segment(1);
+
+		$this->load->view('dashboard/v_navbar', $data);
 		$this->load->view('dashboard/v_header');
 		$this->load->view('dashboard/v_beranda');
 		$this->load->view('dashboard/v_footer');
 	}
 
-	public function belanja(){
-		$data['produk'] = $this->m_data->get_data('tb_produk')->result();
+	public function tambah_keranjang($id_produk){
+		$data = $this->m_data->get_data_where($id_produk, 'tb_produk')->result();
+
+		
+		// cek session yang login, jika session status tidak sama dengan session anggota_login,maka halaman akan di alihkan kembali ke halaman login.
+		if($this->session->userdata('status')!="pembeli_login"){
+			$data['status'] = "Harus Login";
+			redirect(base_url().'login');
+			$this->load->view('v_login', $data);
+		} else {
+			foreach($data as $d){
+				$data_input = array(
+					'id_produk' => $d->id_produk	
+				);
+			}
+	
+			$this->m_data->insert_data($data_input,'tb_cart');
+
+			redirect(base_url().'belanja');
+
+		}
+
+		
+	}
+
+	public function keranjang(){
 		$this->load->view('dashboard/v_header');
-		$this->load->view('dashboard/v_belanja', $data);
+			
 		$this->load->view('dashboard/v_footer');
 	}
 

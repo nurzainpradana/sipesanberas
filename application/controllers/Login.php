@@ -9,6 +9,7 @@ class Login extends CI_Controller {
 	}
 
 	public function index(){
+		$this->load->view('dashboard/v_header');
 		$this->load->view('v_login');
 	}
 
@@ -27,13 +28,14 @@ class Login extends CI_Controller {
 			);
 
 			if($sebagai == "admin"){
-				$cek = $this->m_data->cek_login('admin',$where)->num_rows();
-				$data = $this->m_data->cek_login('admin',$where)->row();
+				$cek = $this->m_data->cek_login('tb_admin',$where)->num_rows();
+				$data = $this->m_data->cek_login('tb_admin',$where)->row();
 
 				if($cek > 0){
 					$data_session = array(
-						'id' => $data->id,
+						'id_admin' => $data->id,
 						'username' => $data->username,
+						'nama' => $data->nama,
 						'status' => 'admin_login'
 					);
 
@@ -44,21 +46,21 @@ class Login extends CI_Controller {
 					redirect(base_url().'login?alert=gagal');
 				}
 
-			}else if($sebagai == "anggota"){
-				$cek = $this->m_data->cek_login('anggota',$where)->num_rows();
-				$data = $this->m_data->cek_login('anggota',$where)->row();
+			}else if($sebagai == "pembeli"){
+				$cek = $this->m_data->cek_login('tb_pembeli',$where)->num_rows();
+				$data = $this->m_data->cek_login('tb_pembeli',$where)->row();
 
 				if($cek > 0){
 					$data_session = array(
-						'id_anggota' => $data->id_anggota,
-						'nm_anggota' => $data->nm_anggota,
+						'id_pembeli' => $data->id_anggota,
+						'nama' => $data->nm_anggota,
 						'username' => $data->username,
-						'status' => 'anggota_login'
+						'status' => 'pembeli_login'
 					);
 
 					$this->session->set_userdata($data_session);
 
-					redirect(base_url().'anggota');
+					redirect(base_url());
 				}else{
 					redirect(base_url().'login?alert=gagal');
 				}

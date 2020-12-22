@@ -8,7 +8,7 @@
   <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery.js' ?>"></script>
   <script type="text/javascript" src="<?php echo base_url().'assets/js/bootstrap.js' ?>"></script>
 </head>
-<body style="background-image: url(assets/img/tokoberas.jpg); background-position: center;
+<body style="background-image: url(<?= base_url().'assets/images/bg_6.jpg' ?>); background-position: center;
   background-repeat: no-repeat;
   background-size: cover;">
 
@@ -34,12 +34,10 @@
             }
           } 
           ?>
-          <h3 class="font-weight-normal text-center text">Sistem Informasi Pesan Beras
+          <h3 class="font-weight-normal text-center text">Toko Beras
           </h3>
           <h2 class="font-weight-normal text-center text mb-4"><b>Sriwijaya</b></h2>
-          <div class="gambar text-center">
-            <img class="gambarlogin" src="assets/img/smaci1.png" height="auto" width="110px" style="">
-          </div>
+          
           <h4 class="font-weight text-center mb-3 mt-0">LOGIN</h4>
           <div class="text-center">
 
@@ -67,15 +65,15 @@
               <label for="sebagai">Login Sebagai :</label>
 
               <select name="sebagai" class="form-control form-control-sm">
+                <option value="pembeli">Pembeli</option>
                 <option value="admin">Admin</option>
-                <option value="anggota">Anggota</option>
               </select>
             </div>
             <div class="text-center">
-            <button type="submit" class="btn btn-sm btn-primary">Login</button>
+            <button type="submit" class="btn btn-md btn-primary">Login</button>
           </div>
           
-            <marquee bgcolor="#FFFACD" scrolldelay="80">~Selamat Datang Di Aplikasi Perpustakaan SMA Negeri 1 Cibitung || Masukkan Username & Password !~</marquee>
+            <marquee class="mt-3 p-3" bgcolor="#FFFACD" scrolldelay="80">~ Silahkan Login Terlebih Dahulu ~</marquee>
                   </div>
           </form>
         </div>
