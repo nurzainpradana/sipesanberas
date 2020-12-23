@@ -33,7 +33,7 @@ class Login extends CI_Controller {
 
 				if($cek > 0){
 					$data_session = array(
-						'id_admin' => $data->id,
+						'id_admin' => $data->id_admin,
 						'username' => $data->username,
 						'nama' => $data->nama,
 						'status' => 'admin_login'
@@ -52,8 +52,8 @@ class Login extends CI_Controller {
 
 				if($cek > 0){
 					$data_session = array(
-						'id_pembeli' => $data->id_anggota,
-						'nama' => $data->nm_anggota,
+						'id_pembeli' => $data->id_pembeli,
+						'nama' => $data->nama,
 						'username' => $data->username,
 						'status' => 'pembeli_login'
 					);

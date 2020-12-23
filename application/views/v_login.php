@@ -70,7 +70,7 @@
               </select>
             </div>
             <div class="text-center">
-            <button type="submit" class="btn btn-md btn-primary">Login</button>
+            <button type="submit" class="btn btn-black btn-md btn-primary">Login</button>
           </div>
           
             <marquee class="mt-3 p-3" bgcolor="#FFFACD" scrolldelay="80">~ Silahkan Login Terlebih Dahulu ~</marquee>

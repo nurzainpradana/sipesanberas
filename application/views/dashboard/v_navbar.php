@@ -11,7 +11,7 @@
 	          <li class="nav-item <?php echo ($segment == "belanja") ? "active" : "";?>"><a href="<?php echo base_url().'belanja'; ?>" class="nav-link">Belanja</a></li>
 			  <li class="nav-item"><a href="blog.html" class="nav-link">Transaksi</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Tentang Kami</a></li>
-	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[<?php echo $this->m_data->get_data('tb_cart')->num_rows(); ?>]</a></li>
+	          <li class="nav-item cta cta-colored" <?php echo ($total_cart == "") ? "hidden" : "";?>><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[<?php echo $total_cart ?>]</a></li>
 	        </ul>
 	      </div>
 	    </div>

@@ -10,6 +10,11 @@ class Dashboard extends CI_Controller {
 
 	public function index(){
 		$data['segment'] = $this->uri->segment(1);
+		if ($this->session->userdata('status') == 'pembeli_login'){
+			$data['total_cart'] = $this->m_data->get_data('tb_cart')->num_rows();
+		} else {
+			$data['total_cart']="";
+		}
 
 		$this->load->view('dashboard/v_navbar', $data);
 		$this->load->view('dashboard/v_header');
@@ -27,15 +32,19 @@ class Dashboard extends CI_Controller {
 			redirect(base_url().'login');
 			$this->load->view('v_login', $data);
 		} else {
-			foreach($data as $d){
+				//redirect(base_url());
+				
+
+				foreach($data as $d){
 				$data_input = array(
-					'id_produk' => $d->id_produk	
+					'id_produk' => $d->id_produk,
+					'id_pembeli' => $this->session->userdata('id_pembeli')
 				);
 			}
 	
 			$this->m_data->insert_data($data_input,'tb_cart');
 
-			redirect(base_url().'belanja');
+			//redirect(base_url().'belanja');
 
 		}
 
