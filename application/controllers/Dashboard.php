@@ -22,31 +22,42 @@ class Dashboard extends CI_Controller {
 		$this->load->view('dashboard/v_footer');
 	}
 
-	public function tambah_keranjang($id_produk){
-		$data = $this->m_data->get_data_where($id_produk, 'tb_produk')->result();
-
-		
+	public function tambah_keranjang($id_produk){	
 		// cek session yang login, jika session status tidak sama dengan session anggota_login,maka halaman akan di alihkan kembali ke halaman login.
 		if($this->session->userdata('status')!="pembeli_login"){
 			$data['status'] = "Harus Login";
 			redirect(base_url().'login');
 			$this->load->view('v_login', $data);
 		} else {
-				//redirect(base_url());
-				
-
-				foreach($data as $d){
 				$data_input = array(
-					'id_produk' => $d->id_produk,
-					'id_pembeli' => $this->session->userdata('id_pembeli')
-				);
+					'id_produk' => $id_produk,
+					'id_pembeli' => $this->session->userdata('id_pembeli'),
+					'quantity' => 1);
+
+				$where = array('id_produk' => $data_input['id_produk'],
+								'id_pembeli' => $data_input['id_pembeli']);
+				
+				// mengambil data dari database sesuai id
+				$get_cart = $this->m_data->cek_login('tb_cart', $where);
+				echo $get_cart->num_rows();
+				
+				if (($get_cart->num_rows()) > 0) {
+					$current_quantity = 0;
+					foreach(($get_cart->result()) as $g){
+						$current_quantity = ($g->quantity) + 1;
+					}
+					$data_input2 = array (
+						'quantity' => $current_quantity
+					);
+					$this->m_data->update_data($where, $data_input2, 'tb_cart');
+				} else if (($get_cart->num_rows()) < 1){
+					$this->m_data->insert_data($data_input,'tb_cart');
+					
+				}
+				redirect(base_url().'belanja');
 			}
-	
-			$this->m_data->insert_data($data_input,'tb_cart');
 
-			//redirect(base_url().'belanja');
-
-		}
+		
 
 		
 	}

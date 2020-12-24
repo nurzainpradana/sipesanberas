@@ -12,6 +12,11 @@ class M_data extends CI_Model{
 		return $this->db->get($table, $limit, $start);
 	}
 
+	function get_data_pagination_like($limit, $start, $table, $like){
+		$this->db->where("nama LIKE '%".$like."%'");
+		return $this->db->get($table, $limit, $start);
+	}
+
 	function get_data($table){
 		return $this->db->get($table);
 	}
@@ -20,6 +25,10 @@ class M_data extends CI_Model{
 		return $this->db->get($table, $where);
 	}
 	
+	function get_search_data($like, $table){
+		$this->db->get($table);
+		return $this->db->where("nama LIKE \'".$like."\'");
+	}
 
 	// fungsi untuk menginput data ke database
 	function insert_data($data,$table){
@@ -37,6 +46,12 @@ class M_data extends CI_Model{
 		$this->db->update($table,$data);
 	}
 
+	// fungsi untuk mengupdate atau mengubah data di database
+	function update_data_multiple_where($where1, $where2,$data,$table){
+		$this->db->where($where1)->where($where2);
+		$this->db->update($table,$data);
+	}
+
 	// fungsi untuk menghapus data dari database
 	function delete_data($where,$table){
 		$this->db->delete($table,$where);
@@ -50,7 +65,7 @@ class M_data extends CI_Model{
 
 	function c_peminjaman($id_peminjaman){
 		$query = "SELECT peminjaman.* , buku.judul_buku , anggota.nm_anggota from peminjaman join buku on peminjaman.id_buku=buku.id_buku join anggota on peminjaman.id_anggota=anggota.id_anggota WHERE peminjaman.id_peminjaman = $id_peminjaman;";
-                              return $this->db->query($query)->row_array();
+        return $this->db->query($query)->row_array();
 	}
 	// function terlambat($id_peminjaman){
 	// 	$query ="SELECT datediff(`pengembalian`.`tgl_pengembalian`,`peminjaman`.`tgl_bataspengembalian`) from `pengembalian` join `peminjaman` on `peminjaman`.`id_peminjaman` = `pengembalian`.`id_peminjaman`";

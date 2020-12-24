@@ -72,7 +72,7 @@
 		    		<div class="sidebar">
 							<div class="sidebar-box-2">
 								<h2 class="heading">Cari Produk</h2>
-								<form method="post" class="colorlib-form-2">
+								<form method="post" class="colorlib-form-2" action="<?php echo base_url().'belanja/cari'; ?>">
 		              <div class="row">
 		                <div class="col-md-12">
 		                  <div class="form-group">
