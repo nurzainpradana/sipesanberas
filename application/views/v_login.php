@@ -71,6 +71,8 @@
             </div>
             <div class="text-center">
             <button type="submit" class="btn btn-black btn-md btn-primary">Login</button>
+            <br>
+            <a class="btn btn-sm mt-2 btn-md" href="<?= base_url().'registrasi' ?>">Daftar Akun</a>
           </div>
           
             <marquee class="mt-3 p-3" bgcolor="#FFFACD" scrolldelay="80">~ Silahkan Login Terlebih Dahulu ~</marquee>

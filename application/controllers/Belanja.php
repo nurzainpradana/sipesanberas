@@ -13,7 +13,7 @@ class Belanja extends CI_Controller {
         
         // Ambil Data Total Cart
         if ($this->session->userdata('status') == 'pembeli_login'){
-			$data['total_cart'] = $this->m_data->get_data('tb_cart')->num_rows();
+			$data['total_cart'] = $this->m_data->get_data_where('tb_cart', ("id_pembeli ='".$this->session->userdata('id_pembeli')."'"))->num_rows();
 		} else {
 			$data['total_cart']="";
 		}
@@ -22,7 +22,7 @@ class Belanja extends CI_Controller {
         $this->load->library('pagination');	
         $config['base_url'] = base_url().('belanja/index'); //site url
         $config['total_rows'] = $this->db->count_all('tb_produk'); //total row
-        $config['per_page'] = 3;  //show record per halaman
+        $config['per_page'] = 5;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
         $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = floor($choice);
@@ -32,7 +32,7 @@ class Belanja extends CI_Controller {
         $config['last_link']        = 'Last';
         $config['next_link']        = '>';
         $config['prev_link']        = '<';
-        $config['full_tag_open']    = '<div class="row mt-5"><div class="col text-center"><div class="block-27"><ul>';
+        $config['full_tag_open']    = '<div class="row"><div class="col text-center"><div class="block-27"><ul>';
         $config['full_tag_close']   = '</ul></div></div></div>';
         $config['num_tag_open']     = '<li class="m-1">';
         $config['num_tag_close']    = '</li>';
@@ -51,7 +51,7 @@ class Belanja extends CI_Controller {
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
  
         //panggil function get_mahasiswa_list yang ada pada mmodel mahasiswa_model. 
-        $data['produk'] = $this->m_data->get_data_pagination($config["per_page"], $data['page'], 'tb_produk');           
+        $data['produk'] = $this->m_data->get_data_pagination_where($config["per_page"], $data['page'], 'tb_produk', ("stock > 0"));           
         $data['pagination'] = $this->pagination->create_links();
  
         //load view mahasiswa view

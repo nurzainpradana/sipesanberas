@@ -12,7 +12,12 @@ class M_data extends CI_Model{
 		return $this->db->get($table, $limit, $start);
 	}
 
-	function get_data_pagination_like($limit, $start, $table, $like){
+	function get_data_pagination_where($limit, $start, $table, $where){
+		$this->db->where($where);
+		return $this->db->get($table, $limit, $start);
+	}
+
+	function get_data_pagination_like($limit, $start, $table, $like, $where){
 		$this->db->where("nama LIKE '%".$like."%'");
 		return $this->db->get($table, $limit, $start);
 	}
@@ -21,8 +26,9 @@ class M_data extends CI_Model{
 		return $this->db->get($table);
 	}
 
-	function get_data_where($where, $table){
-		return $this->db->get($table, $where);
+	function get_data_where($table, $where){
+		$this->db->where($where);
+		return $this->db->get($table);
 	}
 	
 	function get_search_data($like, $table){
@@ -52,15 +58,27 @@ class M_data extends CI_Model{
 		$this->db->update($table,$data);
 	}
 
+	function get_select_data($select, $where, $table) {
+		$this->db->select($select);
+		$this->db->from($table);
+		$this->db->where($where);
+		return $this->db->get();
+	}
+
 	// fungsi untuk menghapus data dari database
 	function delete_data($where,$table){
 		$this->db->delete($table,$where);
 	}
 	// AKHIR FUNGSI CRUD
 
-
 	function cek_login($table,$where){
 		return $this->db->get_where($table,$where);
+	}
+
+	function stock_now($id_produk){
+		$this->db->select("stock");
+		$this->db->from("tb_produk");
+		return $this->db->get();
 	}
 
 	function c_peminjaman($id_peminjaman){
@@ -71,6 +89,12 @@ class M_data extends CI_Model{
 	// 	$query ="SELECT datediff(`pengembalian`.`tgl_pengembalian`,`peminjaman`.`tgl_bataspengembalian`) from `pengembalian` join `peminjaman` on `peminjaman`.`id_peminjaman` = `pengembalian`.`id_peminjaman`";
 	// 	return $this->db->query($query);
 	// }
+	
+	// CART DETAIL
+	function get_cart_detail($id_pembeli){
+		$query = "SELECT c.id_cart , p.gambar, p.nama, p.ukuran, p.harga, quantity, stock as qty_produk, quantity * p.harga as subtotal from tb_cart as c join tb_produk as p on c.id_produk = p.id_produk WHERE c.id_pembeli = $id_pembeli;";
+        return $this->db->query($query)->result();
+	}
 
 }
 
