@@ -17,6 +17,27 @@ class Registrasi extends CI_Controller {
 
 	public function daftar(){
 		// Cek Kelengkapan formulir
+		$this->form_validation->set_rules('nama','Nama','required');
+		$this->form_validation->set_rules('alamat','Alamat','required');
+		$this->form_validation->set_rules('no_telp','Nomor Telepon','required');
+		$this->form_validation->set_rules('username','Username','required');
+		$this->form_validation->set_rules('password','Password','required');
+		
+		if($this->form_validation->run()!=false){
+			$checkdatausername = $this->m_data->get_data_where("tb_pembeli", "username =".$username)->num_rows();
+			// $id = $this->session->userdata('id_admin');
+
+			// $where = array('id_admin' => $id_admin);
+
+			// $data = array('password' => md5($baru));
+
+			// $this->m_data->update_data($where,$data,'admin');
+
+			// redirect(base_url().'admin/ganti_password/?alert=sukses');
+
+		}else{
+			redirect(base_url().'registrasi');
+		}
 
 		// Verifikasi username
 

@@ -33,27 +33,30 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-10 ftco-animate">
+		  
 						<form action="<?= base_url().'registrasi/daftar'?>"method="post" class="billing-form">
-							<h3 class="mb-4 billing-heading">Data Diri Anda</h3>
+							<h3 class="mb-4 billing-heading">Data Diri Anda 
+					<?php echo validation_errors(); ?></h3>
+							
 	          	<div class="row align-items-end">
 	          		<div class="col-md-12">
 	                <div class="form-group">
 	                	<label for="nama">Nama</label>
-	                  <input name="nama" type="text" class="form-control" placeholder="Masukkan nama anda">
+	                  <input name="nama" type="text" class="form-control" placeholder="Masukkan nama anda" >
 	                </div>
 	              </div>
 		            <div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
 							<label for="alamat">Alamat Rumah Lengkap</label>
-						<input name="alamat" type="text" class="form-control" placeholder="Masukkan alamat lengkap rumah anda">
+						<input name="alamat" type="text" class="form-control" placeholder="Masukkan alamat lengkap rumah anda" >
 						</div>
 		            </div>
 		            <div class="w-100"></div>
 		            <div class="col-md-6">
 		            	<div class="form-group">
 		            		<label for="no_telp">Nomor Telepon</label>
-	                  <input name="no_telp" type="number" class="form-control" placeholder="Masukkan nomor telepon anda">
+	                  <input name="no_telp" type="number" class="form-control" placeholder="Masukkan nomor telepon anda" >
 	                </div>
 		            </div>
 					<div class="col-md-6">
@@ -66,13 +69,13 @@
 		            <div class="col-md-6">
 	                <div class="form-group">
 	                	<label for="username">Username</label>
-	                  <input name="username" type="text" class="form-control" placeholder="Masukkan Username">
+	                  <input name="username" type="text" class="form-control" placeholder="Masukkan Username" >
 	                </div>
 	              </div>
 	              <div class="col-md-6">
 	                <div class="form-group">
 	                	<label for="password">Password</label>
-	                  <input name="password" type="password" class="form-control" placeholder="Masukkan Password">
+	                  <input name="password" type="password" class="form-control" placeholder="Masukkan Password"  >
 	                </div>
                 </div>
 				<div class="w-100 "></div>

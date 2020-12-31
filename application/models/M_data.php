@@ -26,6 +26,17 @@ class M_data extends CI_Model{
 		return $this->db->get($table);
 	}
 
+	
+	function get_data_join($select, $table, $table_join, $join ){
+		$query = $this->db->select($select)->from($table)->join($table_join, $join)->get();
+		return $query->result();
+	}
+	
+	function get_data_join_where($select, $table, $table_join, $join, $where){
+		$query = $this->db->select($select)->from($table)->join($table_join, $join)->where($where)->get();
+		return $query->result();
+	}
+
 	function get_data_where($table, $where){
 		$this->db->where($where);
 		return $this->db->get($table);
@@ -94,6 +105,15 @@ class M_data extends CI_Model{
 	function get_cart_detail($id_pembeli){
 		$query = "SELECT c.id_cart , p.gambar, p.nama, p.ukuran, p.harga, quantity, stock as qty_produk, quantity * p.harga as subtotal from tb_cart as c join tb_produk as p on c.id_produk = p.id_produk WHERE c.id_pembeli = $id_pembeli;";
         return $this->db->query($query)->result();
+	}
+
+	// GET LAST ID
+	function get_last_id($selected_id, $table_name, $id_pembeli) {
+		$query = $this->db->query("SELECT MAX(".$selected_id.") as last_id FROM ".$table_name." where id_pembeli ='".$id_pembeli."'");
+		// $this->db->select("MAX(".$selected_id.") as last_id");
+		// $this->db->from("tb_cart");
+		// $this->db->where("id_cart", $id_pembeli);
+		return $query->result();
 	}
 
 }

@@ -17,7 +17,7 @@ class Cart extends CI_Controller {
         $data['segment'] = $this->uri->segment(1);
         // Ambil Data Total Cart
         if ($this->session->userdata('status') == 'pembeli_login'){
-			$data['total_cart'] = $this->m_data->get_data('tb_cart')->num_rows();
+			$data['total_cart'] = $this->m_data->get_data_where('tb_cart', ("id_pembeli ='".$this->session->userdata('id_pembeli')."'"))->num_rows();
 		} else {
 			$data['total_cart']="";
         }
@@ -88,5 +88,57 @@ class Cart extends CI_Controller {
 		$this->m_data->delete_data('id_cart = '.$id_cart, 'tb_cart');
 		redirect(base_url().'cart');
 	}
+
+	public function checkout() {
+		// Ambil data cart
+		$join = "c.id_produk = p.id_produk";
+		$table_join = "tb_produk as p";
+		$data_cart = $this->m_data->get_data_join_where("*", 'tb_cart as c', $table_join, $join, "c.id_pembeli = ".$this->session->userdata('id_pembeli'));
+
+		$total = 0;
+		foreach ($data_cart as $sc){
+			$harga = $sc->harga;
+			$quantity = $sc->quantity;
+			echo $harga."<br>".$quantity."<br>";
+			$total = $total + ($harga*$quantity);
+		}
+
+		echo $total;
+
+		$date = date('Y-m-d');
+		echo $date;
+
+		// Buat record pemesanan
+		 $data_input = array(
+		 	'id_pembeli' => $this->session->userdata('id_pembeli'),
+			'total' => $total,
+			'tgl_pemesanan' => date('Y-m-d'),
+			'status' => 'Menunggu Verifikasi Pembayaran');
+
+		$this->m_data->insert_data($data_input,'tb_pemesanan');
+		
+		// Ambil idcart dari tb_cart
+		$last_id = $this->m_data->get_last_id("id_pemesanan", "tb_pemesanan", $this->session->userdata('id_pembeli'));
+		foreach ($last_id as $l) {
+			$last = $l->last_id;
+		}
+		echo $last;
+		// Buat detail pemesanan
+		foreach($data_cart as $dc){
+			
+			$data_input = array(
+				'id_pemesanan' => $last,
+				'id_produk' => $dc->id_produk,
+			   'quantity' => $dc->quantity,
+			   'harga' => $dc->harga,
+			   'subtotal' => ($dc->harga)*($dc->quantity));
+			   $this->m_data->insert_data($data_input,'tb_detail_pemesanan');
+		}
+
+		// hapus data cart
+		$this->m_data->delete_data("id_pembeli='".$this->session->userdata('id_pembeli')."'",'tb_cart');
+	}
+
+
 }
 ?>

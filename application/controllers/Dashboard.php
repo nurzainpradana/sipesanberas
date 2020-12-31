@@ -11,7 +11,7 @@ class Dashboard extends CI_Controller {
 	public function index(){
 		$data['segment'] = $this->uri->segment(1);
 		if ($this->session->userdata('status') == 'pembeli_login'){
-			$data['total_cart'] = $this->m_data->get_data('tb_cart')->num_rows();
+			$data['total_cart'] = $this->m_data->get_data_where('tb_cart', ("id_pembeli ='".$this->session->userdata('id_pembeli')."'"))->num_rows();
 		} else {
 			$data['total_cart']="";
 		}
