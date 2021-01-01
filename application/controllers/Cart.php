@@ -128,6 +128,8 @@ class Cart extends CI_Controller {
 
 		// hapus data cart
 		$this->m_data->delete_data("id_pembeli='".$this->session->userdata('id_pembeli')."'",'tb_cart');
+
+		redirect(base_url()."pemesanan/detail/".$last);
 	}
 
 

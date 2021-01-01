@@ -106,6 +106,12 @@ class M_data extends CI_Model{
 		$query = "SELECT c.id_cart , p.gambar, p.nama, p.ukuran, p.harga, quantity, stock as qty_produk, quantity * p.harga as subtotal from tb_cart as c join tb_produk as p on c.id_produk = p.id_produk WHERE c.id_pembeli = $id_pembeli;";
         return $this->db->query($query)->result();
 	}
+	
+	// CART DETAIL
+	function get_pemesanan_detail($id_pemesanan){
+		$query = "SELECT dp.id_pemesanan , p.gambar, p.nama, p.ukuran, p.harga, quantity, subtotal from tb_detail_pemesanan as dp join tb_produk as p on dp.id_produk = p.id_produk WHERE dp.id_pemesanan = $id_pemesanan;";
+        return $this->db->query($query)->result();
+	}
 
 	// GET LAST ID
 	function get_last_id($selected_id, $table_name, $id_pembeli) {

@@ -9,7 +9,7 @@
           <ul class="navbar-nav ml-auto">
 	          <li class="nav-item <?php echo ($segment == "") ? "active" : "";?>" ><a href="<?php echo base_url(); ?>" class="nav-link">Beranda</a></li>
 	          <li class="nav-item <?php echo ($segment == "belanja") ? "active" : "";?>"><a href="<?php echo base_url().'belanja'; ?>" class="nav-link">Belanja</a></li>
-			  <li class="nav-item"><a href="blog.html" class="nav-link">Transaksi</a></li>
+			  <li class="nav-item <?php echo ($segment == "pemesanan") ? "active" : "";?>"><a href="<?php echo base_url().'pemesanan'; ?>" class="nav-link">Pemesanan</a></li>
 	          <li class="nav-item" <?php echo ($this->session->userdata('status')!="pembeli_login") ? "hidden" : "active";?>>
 			  	<a href="contact.html" class="nav-link">Hi!, <?php echo $this->session->userdata('username')?></a>
 			  </li>
