@@ -7,13 +7,13 @@
 	        <div class="container-fluid p-0">
 	          <div class="row d-md-flex no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
 	          	<img class="one-third order-md-last img-fluid" src="<?php echo base_url().'assets/images/rice.png'?>" alt="">
-		          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+		          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '50%' }">
 		          	<div class="text">
-		          		<span class="subheading">#KemudahanPemesanan</span>
-		          		<div class="horizontal">
+		          		<span class="subheading p-2">#KemudahanPemesanan</span>
+		          		<div class="horizontal  bg-white card p-3">
 				            <h1 class="mb-4 mt-3">Selamat Datang</h1>
 				            <p class="mb-4">"Sebuah Terobosan Dalam Pemesanan Beras Di Indonesia, Untuk Memenuhi Kebutuhan Masyarakat Indonesia Akan Sebuah Cara Berbelanja Yang Praktis Dan Mudah "</p>				            
-				            <p><a href="#" class="btn-custom">Belanja Sekarang</a></p>
+				            <p><a href="#" class="btn btn-black py-3 px-4">Belanja Sekarang</a></p>
 				          </div>
 		            </div>
 		          </div>
@@ -28,12 +28,11 @@
 	          	<img class="one-third order-md-last img-fluid" src="<?php echo base_url().'assets/images/rice2.png'?>" alt="">
 		          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 		          	<div class="text">
-		          		<span class="subheading">#Hargabersaing</span>
-		          		<div class="horizontal">
+		          		<span class="subheading p-2">#Hargabersaing</span>
+		          		<div class="horizontal  bg-white card p-3">
 				            <h1 class="mb-4 mt-3">Selamat Berbelanja</h1>
 				            <p class="mb-4">Beras dengan harga yang terjangkau dengan kualitas terbaik</p>
-				            
-				            <p><a href="#" class="btn-custom">Belanja Sekarang</a></p>
+				            <p><a href="#" class="btn btn-black py-3 px-4">Belanja Sekarang</a></p>
 				          </div>
 		            </div>
 		          </div>

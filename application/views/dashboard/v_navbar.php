@@ -13,7 +13,7 @@
 	          <li class="nav-item" <?php echo ($this->session->userdata('status')!="pembeli_login") ? "hidden" : "active";?>>
 			  	<a href="contact.html" class="nav-link">Hi!, <?php echo $this->session->userdata('username')?></a>
 			  </li>
-	          <li class="nav-item cta cta-colored <?php echo ($segment == "cart") ? "active" : "";?>" <?php echo ($total_cart == "") ? "hidden" : "";?>><a href="<?php echo base_url().'cart'; ?>" class="nav-link"><span class="icon-shopping_cart"></span>[<?php echo $total_cart ?>]</a></li>
+	          <li class="nav-item <?php echo ($segment == "cart") ? "active" : "";?>" <?php echo ($total_cart == "") ? "hidden" : "";?>><a href="<?php echo base_url().'cart'; ?>" class="nav-link"><span class="icon-shopping_cart"></span>[<?php echo $total_cart ?>]</a></li>
 			  <li class="nav-item" <?php echo ($this->session->userdata('status')=="pembeli_login") ? "hidden" : "active";?>>
 			  <a href="<?php echo base_url().'login'; ?>" class="nav-link">Login</a></li>
 			  <li class="nav-item" <?php echo ($this->session->userdata('status')!="pembeli_login") ? "hidden" : "active";?>>

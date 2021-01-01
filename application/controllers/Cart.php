@@ -40,7 +40,6 @@ class Cart extends CI_Controller {
 			$id_produk = $r->id_produk;
 			$quantity = $r->quantity;
 		}
-		echo $id_produk." ".$quantity;
 
 		// Cek Stock
 		$where2 = array(
@@ -50,7 +49,6 @@ class Cart extends CI_Controller {
 		foreach ($result2 as $r) {
 			$stock = $r->stock;
 		}
-		echo $stock;
 
 		if ($quantity < $stock) {
 			$data = array(
@@ -71,7 +69,6 @@ class Cart extends CI_Controller {
 			$id_produk = $r->id_produk;
 			$quantity = $r->quantity;
 		}
-		echo $id_produk." ".$quantity;
 
 		if ($quantity > 1) {
 			$data = array(
@@ -99,15 +96,10 @@ class Cart extends CI_Controller {
 		foreach ($data_cart as $sc){
 			$harga = $sc->harga;
 			$quantity = $sc->quantity;
-			echo $harga."<br>".$quantity."<br>";
 			$total = $total + ($harga*$quantity);
 		}
 
-		echo $total;
-
 		$date = date('Y-m-d');
-		echo $date;
-
 		// Buat record pemesanan
 		 $data_input = array(
 		 	'id_pembeli' => $this->session->userdata('id_pembeli'),
@@ -122,7 +114,6 @@ class Cart extends CI_Controller {
 		foreach ($last_id as $l) {
 			$last = $l->last_id;
 		}
-		echo $last;
 		// Buat detail pemesanan
 		foreach($data_cart as $dc){
 			

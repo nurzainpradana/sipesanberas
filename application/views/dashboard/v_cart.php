@@ -13,7 +13,7 @@
     <section class="ftco-section ftco-cart">
 			<div class="container">
 				<div class="row">
-    			<div class="col-md-11 ftco-animate">
+    			<div class="col-md-12 col-sm-12 ftco-animate">
     				<div class="cart-list">
 	    				<table class="table">
 						    <thead class="thead-primary">
@@ -27,25 +27,35 @@
 						      </tr>
 						    </thead>
 						    <tbody>
-							<?php foreach ($cart as $c) { 
-								$total_cart += $c->subtotal; ?>
+							<?php 
+								$check_stock = 0;
+								foreach ($cart as $c) { 
+								$total_cart += $c->subtotal;
+								if ($c->quantity > $c->qty_produk) {
+									$check_stock += 1;
+								} else {
+									$check_stock += 0;
+								} 
+								 ?>
 						      <tr class="text-center">
-						        <td class="product-remove"><a href="<?= base_url().'cart/hapus_cart/'.$c->id_cart ?>"><span class="ion-ios-close"></span></a></td>
+						        <td class=""><a href="<?= base_url().'cart/hapus_cart/'.$c->id_cart ?>"><span class="p-3 <?= ($c->quantity > $c->qty_produk) ? "btn-danger" : "btn-primary";?>">x</span></a></td>
 								
 								<td class="image-prod"><div class="img" style="background-image:url(<?= base_url().'assets/images/produk/'.$c->gambar ?>);"></div></td>
 
 						        <td class="product-name">
 						        	<h3><?= $c->nama ?></h3>
 						        	<p><?= $c->ukuran ?></p>
+									<p class="bg-warning p-1" <?= ($c->quantity > $c->qty_produk) ? "" : "hidden";?>>Stock Tidak Cukup</p>
+									<p class="bg-danger p-1" <?= ($c->quantity == 0) ? "" : "hidden";?>>Stock Habis</p>
 						        </td>
 						        
 						        <td class="price"><?= "Rp. ".number_format($c->harga,2,',','.') ?></td>
 						        
 						        <td class="quantity">
-						        	<div class="input-group mb-3">
-									<a href="<?= base_url().'cart/kurang_qty_cart/'.$c->id_cart ?>" class="btn-primary p-3">-</a>
-									 <input type="text" name="quantity" class="quantity form-control input-number" value="<?= $c->quantity ?>" min="1" max="100" disabled>
-									<a href="<?= base_url().'cart/tambah_qty_cart/'.$c->id_cart ?>" class="btn-primary p-3">+</a>
+						        	<div class="input-group mb-3 align-items-center justify-content-center">
+										<a href="<?= base_url().'cart/kurang_qty_cart/'.$c->id_cart ?>" class="btn-primary p-3" <?= ($c->quantity == 1) ? "hidden" : "";?>>-</a>
+										<span class="p-3 border"><?= $c->quantity ?></span>
+										<a href="<?= base_url().'cart/tambah_qty_cart/'.$c->id_cart ?>" class="btn-primary p-3"  <?= ($c->quantity < $c->qty_produk) ? "" : "hidden";?>>+</a>
 					          	</div>
 					          </td>
 						        
@@ -67,8 +77,9 @@
     						<span><?= "Rp. ".number_format($total_cart,2,',','.') ?></span>
     					</p>
     				</div>
-    				<p class="text-center"><a href="<?= base_url().'cart/checkout' ?>" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
-    			</div>
+    				<p class="text-center"><a href="<?= base_url().'cart/checkout' ?>" class="btn btn-primary py-3 px-4" >Proceed to Checkout</a></p>
+					<td ><p <?= ($check_stock > 0) ? "" : "hidden";?>>Mohon maaf anda tidak bisa melanjutkan transaksi <br> Periksa kembali keranjang anda</p></td>
+				</div>
     		</div>
 			</div>
 		</section>
