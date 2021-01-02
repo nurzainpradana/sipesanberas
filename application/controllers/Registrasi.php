@@ -16,6 +16,13 @@ class Registrasi extends CI_Controller {
 	}
 
 	public function daftar(){
+		$nama = $this->input->post('nama');
+		$alamat = $this->input->post('alamat');
+		$no_telp = $this->input->post('no_telp');
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$email = $this->input->post('email');
+
 		// Cek Kelengkapan formulir
 		$this->form_validation->set_rules('nama','Nama','required');
 		$this->form_validation->set_rules('alamat','Alamat','required');
@@ -24,7 +31,38 @@ class Registrasi extends CI_Controller {
 		$this->form_validation->set_rules('password','Password','required');
 		
 		if($this->form_validation->run()!=false){
-			$checkdatausername = $this->m_data->get_data_where("tb_pembeli", "username =".$username)->num_rows();
+			$checkdatausername = $this->m_data->get_data_where("tb_pembeli", "username = '".$username."'")->num_rows();
+			if($checkdatausername == 0){
+				$data_input = array(
+					'nama' => $nama,
+					'alamat' => $alamat,
+					'no_telp' => $no_telp,
+				   'email' => $email,
+				   'username' => $username,
+				   'password' => $password);
+				   $this->m_data->insert_data($data_input,'tb_pembeli');
+
+				   
+					$getusername = $this->m_data->get_data_where("tb_pembeli", "nama = '".$nama."'")->result();
+					foreach ($getusername as $g){
+						$id_pembeli = $g->id_pembeli;
+					}
+
+					
+					$data_session = array(
+						'id_pembeli' => $id_pembeli,
+						'nama' => $nama,
+						'username' => $username,
+						'status' => 'pembeli_login'
+					);
+
+					$this->session->set_userdata($data_session);
+					redirect(base_url());
+					
+				   
+			} else {	
+				redirect(base_url().'registrasi?alert=1');
+			}
 			// $id = $this->session->userdata('id_admin');
 
 			// $where = array('id_admin' => $id_admin);
@@ -36,7 +74,7 @@ class Registrasi extends CI_Controller {
 			// redirect(base_url().'admin/ganti_password/?alert=sukses');
 
 		}else{
-			redirect(base_url().'registrasi');
+			redirect(base_url().'registrasi?alert=2');
 		}
 
 		// Verifikasi username

@@ -37,15 +37,29 @@
 						        
 						        <td><?= "Rp. ".number_format($p->total,2,',','.') ?></td>
 						        
-						        <td><?= $p->status ?></td>
+								<td class="w-25"> <span class="p-3 <?php 
+								$status = $p->status;
+								switch ($status){
+									case "Menunggu Pembayaran": echo "btn-warning"; break;
+									case "Verifikasi Pembayaran": echo "btn-info"; break;
+									case "Pengiriman": echo "btn-primary"; break;
+									case "Selesai": echo "btn-success"; break;
+									case "Ditolak": echo "btn-danger"; break;
+								} ?>"><?= $p->status ?></span>
+								
+							</td>
 						      </tr><!-- END TR-->
 							<?php } ?>
 						    </tbody>
 						  </table>
 					  </div>
+					<div class="mt-2">
+						<?php echo $pagination; ?>
+					</div>
     			</div>
-    		</div>
 			</div>
+			</div>
+				
 		</section>
 		
 

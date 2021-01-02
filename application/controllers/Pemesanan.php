@@ -25,7 +25,7 @@ class Pemesanan extends CI_Controller {
 		
         //konfigurasi pagination
         $this->load->library('pagination');	
-        $config['base_url'] = base_url().('pemesanan'); //site url
+        $config['base_url'] = base_url().('pemesanan/index'); //site url
         $config['total_rows'] = $this->db->count_all('tb_pemesanan'); //total row
         $config['per_page'] = 5;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter

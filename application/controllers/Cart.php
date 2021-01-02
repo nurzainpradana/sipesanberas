@@ -105,7 +105,7 @@ class Cart extends CI_Controller {
 		 	'id_pembeli' => $this->session->userdata('id_pembeli'),
 			'total' => $total,
 			'tgl_pemesanan' => date('Y-m-d'),
-			'status' => 'Menunggu Verifikasi Pembayaran');
+			'status' => 'Menunggu Pembayaran');
 
 		$this->m_data->insert_data($data_input,'tb_pemesanan');
 		

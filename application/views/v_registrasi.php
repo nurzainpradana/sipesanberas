@@ -35,8 +35,18 @@
           <div class="col-xl-10 ftco-animate">
 		  
 						<form action="<?= base_url().'registrasi/daftar'?>"method="post" class="billing-form">
-							<h3 class="mb-4 billing-heading">Data Diri Anda 
-					<?php echo validation_errors(); ?></h3>
+							<h3 class="mb-4 billing-heading">Data Diri Anda</h3>
+							<?php 
+							if(isset($_GET['alert'])){
+								if($_GET['alert']=="1"){
+								echo "<div class='alert alert-danger font-weight-bold text-center'>Username sudah terdaftar</div>";
+								}else if($_GET['alert']=="belum_login"){
+								echo "<div class='alert alert-danger font-weight-bold text-center'>SILAHKAN LOGIN TERLEBIH DULU!</div>";
+								}else if($_GET['alert']=="logout"){
+								echo "<div class='alert alert-success font-weight-bold text-center'>ANDA TELAH LOGOUT!</div>";
+								}
+							} 
+							?>
 							
 	          	<div class="row align-items-end">
 	          		<div class="col-md-12">
