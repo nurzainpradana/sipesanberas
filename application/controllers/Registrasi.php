@@ -5,8 +5,6 @@ class Registrasi extends CI_Controller {
 
 	function __construct(){
         parent::__construct();
-        
-		
 	}
 
 	public function index(){
@@ -39,7 +37,7 @@ class Registrasi extends CI_Controller {
 					'no_telp' => $no_telp,
 				   'email' => $email,
 				   'username' => $username,
-				   'password' => $password);
+				   'password' => md5($password));
 				   $this->m_data->insert_data($data_input,'tb_pembeli');
 
 				   
@@ -63,64 +61,10 @@ class Registrasi extends CI_Controller {
 			} else {	
 				redirect(base_url().'registrasi?alert=1');
 			}
-			// $id = $this->session->userdata('id_admin');
-
-			// $where = array('id_admin' => $id_admin);
-
-			// $data = array('password' => md5($baru));
-
-			// $this->m_data->update_data($where,$data,'admin');
-
-			// redirect(base_url().'admin/ganti_password/?alert=sukses');
-
 		}else{
 			redirect(base_url().'registrasi?alert=2');
 		}
-
-		// Verifikasi username
-
-		// Simpan Data
 	}
-	
-	public function tambah_qty_cart($id_cart){
-		// Mencari ID_PRODUK dari ID_CART
-		$where = array(
-			'id_cart' => $id_cart
-		);
-		$result = $this->m_data->get_select_data('id_produk, quantity', 'id_cart = '.$id_cart, 'tb_cart')->result();
-		foreach ($result as $r) {
-			$id_produk = $r->id_produk;
-			$quantity = $r->quantity;
-		}
-		echo $id_produk." ".$quantity;
 
-		// Cek Stock
-		$where2 = array(
-			'id_produk' => $id_produk
-		);
-		$result2 = $this->m_data->get_select_data('stock', 'id_produk = '.$id_produk, 'tb_produk')->result();
-		foreach ($result2 as $r) {
-			$stock = $r->stock;
-		}
-		echo $stock;
-
-		if ($quantity < $stock) {
-			$data = array(
-				'quantity' => $quantity + 1
-			);
-			$this->m_data->update_data( $where , $data,"tb_cart");
-		}
-
-		// $stock = $this->m_data->update_data($id_produk);
-
-		// if ($quantity < $stock) {
-		// 	$data = array(
-		// 		'quantity' => 'quantity + 1'
-		// 	);
-			
-		// 	$this->m_data->update_data($where, "tb_cart", $data);
-		// }
-		
-	}
 }
 ?>

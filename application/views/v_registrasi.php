@@ -40,10 +40,8 @@
 							if(isset($_GET['alert'])){
 								if($_GET['alert']=="1"){
 								echo "<div class='alert alert-danger font-weight-bold text-center'>Username sudah terdaftar</div>";
-								}else if($_GET['alert']=="belum_login"){
-								echo "<div class='alert alert-danger font-weight-bold text-center'>SILAHKAN LOGIN TERLEBIH DULU!</div>";
-								}else if($_GET['alert']=="logout"){
-								echo "<div class='alert alert-success font-weight-bold text-center'>ANDA TELAH LOGOUT!</div>";
+								}else if($_GET['alert']=="2"){
+								echo "<div class='alert alert-danger font-weight-bold text-center'>Proses Registrasi Gagal</div>";
 								}
 							} 
 							?>
@@ -52,21 +50,21 @@
 	          		<div class="col-md-12">
 	                <div class="form-group">
 	                	<label for="nama">Nama</label>
-	                  <input name="nama" type="text" class="form-control" placeholder="Masukkan nama anda" >
+	                  <input name="nama" type="text" class="form-control" placeholder="Masukkan nama anda" required >
 	                </div>
 	              </div>
 		            <div class="w-100"></div>
 						<div class="col-md-12">
 							<div class="form-group">
 							<label for="alamat">Alamat Rumah Lengkap</label>
-						<input name="alamat" type="text" class="form-control" placeholder="Masukkan alamat lengkap rumah anda" >
+						<input name="alamat" type="text" class="form-control" placeholder="Masukkan alamat lengkap rumah anda" required>
 						</div>
 		            </div>
 		            <div class="w-100"></div>
 		            <div class="col-md-6">
 		            	<div class="form-group">
 		            		<label for="no_telp">Nomor Telepon</label>
-	                  <input name="no_telp" type="number" class="form-control" placeholder="Masukkan nomor telepon anda" >
+	                  <input name="no_telp" type="number" class="form-control" placeholder="Masukkan nomor telepon anda" required>
 	                </div>
 		            </div>
 					<div class="col-md-6">
@@ -79,13 +77,13 @@
 		            <div class="col-md-6">
 	                <div class="form-group">
 	                	<label for="username">Username</label>
-	                  <input name="username" type="text" class="form-control" placeholder="Masukkan Username" >
+	                  <input name="username" type="text" class="form-control" placeholder="Masukkan Username" required >
 	                </div>
 	              </div>
 	              <div class="col-md-6">
 	                <div class="form-group">
 	                	<label for="password">Password</label>
-	                  <input name="password" type="password" class="form-control" placeholder="Masukkan Password"  >
+	                  <input name="password" type="password" class="form-control" placeholder="Masukkan Password" required >
 	                </div>
                 </div>
 				<div class="w-100 "></div>
