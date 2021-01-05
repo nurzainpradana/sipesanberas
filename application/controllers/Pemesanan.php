@@ -74,7 +74,7 @@ class Pemesanan extends CI_Controller {
 			$data['total_cart']="";
         }
 
-		$data['detail_pemesanan'] = $this->m_data->get_pemesanan_detail($this->session->userdata('id_pembeli'));
+		$data['detail_pemesanan'] = $this->m_data->get_pemesanan_detail($id_pemesanan);
 		$data['id_pemesanan'] = $id_pemesanan;
 		$data['pemesanan'] = $this->m_data->get_data_where("tb_pemesanan", "id_pemesanan = ".$id_pemesanan)->result();
 

@@ -11,7 +11,7 @@
 		          	<div class="text">
 		          		<span class="subheading p-2">#KemudahanPemesanan</span>
 		          		<div class="horizontal  bg-white card p-3">
-				            <h1 class="mb-4 mt-3">Selamat Datang</h1>
+				            <h3 class="mb-4 mt-3">Selamat Datang</h3>
 				            <p class="mb-4">"Sebuah Terobosan Dalam Pemesanan Beras Di Indonesia, Untuk Memenuhi Kebutuhan Masyarakat Indonesia Akan Sebuah Cara Berbelanja Yang Praktis Dan Mudah "</p>				            
 				            <p><a href="#" class="btn btn-black py-3 px-4">Belanja Sekarang</a></p>
 				          </div>
@@ -30,7 +30,7 @@
 		          	<div class="text">
 		          		<span class="subheading p-2">#Hargabersaing</span>
 		          		<div class="horizontal  bg-white card p-3">
-				            <h1 class="mb-4 mt-3">Selamat Berbelanja</h1>
+				            <h3 class="mb-4 mt-3">Selamat Berbelanja</h3>
 				            <p class="mb-4">Beras dengan harga yang terjangkau dengan kualitas terbaik</p>
 				            <p><a href="#" class="btn btn-black py-3 px-4">Belanja Sekarang</a></p>
 				          </div>

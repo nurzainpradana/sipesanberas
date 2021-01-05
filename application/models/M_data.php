@@ -109,7 +109,7 @@ class M_data extends CI_Model{
 	
 	// CART DETAIL
 	function get_pemesanan_detail($id_pemesanan){
-		$query = "SELECT dp.id_pemesanan , p.gambar, p.nama, p.ukuran, p.harga, quantity, subtotal from tb_detail_pemesanan as dp join tb_produk as p on dp.id_produk = p.id_produk WHERE dp.id_pemesanan = $id_pemesanan;";
+		$query = "SELECT dp.id_pemesanan , p.gambar, p.nama, p.ukuran, p.harga, quantity, subtotal from tb_detail_pemesanan as dp join tb_produk as p on dp.id_produk = p.id_produk WHERE dp.id_pemesanan = '".$id_pemesanan."';";
         return $this->db->query($query)->result();
 	}
 

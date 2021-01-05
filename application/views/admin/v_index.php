@@ -4,7 +4,8 @@
      <div class="gambar text-center">
 </div>
       <h1>Selamat Datang!</h5>
-      <p> Di Aplikasi Perpustakaan SMA Negeri 1 Cibitung. </p>
+      <p> Di Aplikasi Sistem Informasi Pesan Beras. <br> <h5> Toko Beras Sriwijaya </h5></p>
+      
       <p>
         Anda telah login sebagai <b><?php echo $this->session->userdata('username'); ?></b> [admin]. 
       </p>
@@ -19,7 +20,7 @@
             <i class="fa fa-book"></i>
             </div>
           </h1>
-          Jumlah Buku
+          Jumlah Produk
         </div>
       </div>
     </div>
@@ -33,7 +34,7 @@
             <i class="fa fa-users"></i>
             </div>
           </h1>
-          Jumlah Anggota
+          Jumlah Pembeli
         </div>
       </div>
     </div>
@@ -47,7 +48,7 @@
             <i class="fa fa-book"></i>
             </div>
           </h1>
-          Jumlah Total Peminjaman
+          Jumlah Pesanan
         </div>
       </div>
     </div>
