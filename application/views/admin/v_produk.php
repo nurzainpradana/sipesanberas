@@ -5,6 +5,18 @@
      
     </div>
 
+    <?php 
+          if(isset($_GET['alert'])){
+            if($_GET['alert']=="1"){
+              echo "<div class='alert alert-success font-weight-bold text-center'>Produk Berhasil Ditambah</div>";
+            }else if($_GET['alert']=="belum_login"){
+              echo "<div class='alert alert-success font-weight-bold text-center'>Produk Berhasil Dihapus</div>";
+            }else if($_GET['alert']=="logout"){
+              echo "<div class='alert alert-success font-weight-bold text-center'>ANDA TELAH LOGOUT!</div>";
+            }
+          } 
+          ?>
+
     <div class="card-body">
       <div class="text-center">
       
@@ -38,7 +50,7 @@
               <tr>
                 <td align="center"><?php echo $no++; ?></td>
                 <td align="center">
-		    					<img class="img-fluid h-25" src="<?= base_url().'assets/images/produk/'.$b->gambar?>"> </td>
+		    					<img class="img" width="200px" src="<?= base_url().'assets/images/produk/'.$b->gambar?>"> </td>
                 <td align="center"><?php echo $b->gambar; ?></td>
                 <td align="center"><?php echo $b->nama; ?></td>
                 <td align="center"><?php echo $b->ukuran; ?></td>

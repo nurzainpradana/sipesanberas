@@ -106,55 +106,51 @@ class Admin extends CI_Controller {
 	function produk_edit($id_produk){
 		$where = array('id_produk' => $id_produk);
 		// mengambil data dari database sesuai id
-		$data['produk'] = $this->m_data->edit_data($where,'produk')->result();
+		$data['produk'] = $this->m_data->edit_data($where,'tb_produk')->result();
 		$this->load->view('admin/v_header');
-			$this->load->view('admin/v_produk_edit',$data);
+		$this->load->view('admin/v_produk_edit',$data);
 		$this->load->view('admin/v_footer');
 	}
 
 	function produk_update(){
 		$id_produk = $this->input->post('id_produk');
-		$judul_produk = $this->input->post('judul_produk');
-		$tahun = $this->input->post('tahun');
-		$penulis = $this->input->post('penulis');
-		$penerbit = $this->input->post('penerbit');
+		$nama = $this->input->post('nama');
+		$ukuran = $this->input->post('ukuran');
+		$harga = $this->input->post('harga');
 		$stock = $this->input->post('stock');
+		$gambar_lama = $this->input->post('gambar_lama');
 
-		$where = array(
-			'id_produk' => $id_produk
-		);
 
 		$data = array(
-			'judul_produk' => $judul_produk,
-			'tahun' => $tahun,
-			'penulis' => $penulis,
-			'penerbit' => $penerbit,
+			'nama' => $nama,
+			'ukuran' => $ukuran,
+			'harga' => $harga,
 			'stock' => $stock
 		);
 
-		// update data ke database
-		$this->m_data->update_data($where,$data,'produk');
-		$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
-														Update Sukses..
-														</div>');
+		
+        if (!empty($_FILES['gambar']['name'])) {
+            $image = $this->_do_upload($nama);
+            $data['gambar'] = $image;
+        } else {
+			$data['gambar'] = $gambar_lama;
+		}
 
-		// mengalihkan halaman ke halaman data produk
-		redirect(base_url().'admin/produk');
-	}
-
-	function produk_hapus($id_produk){
 		$where = array(
 			'id_produk' => $id_produk
 		);
+        
+		// insert data ke database
+		$this->m_data->update_data($where, $data,'tb_produk');
 
-		// menghapus data produk dari database sesuai id
-		$this->m_data->delete_data($where,'produk');
-		$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">
-														Delete Sukses..
+		$this->session->set_flashdata('message','<div class="alert alert-primary" role="alert">
+														 Produk Berhasil Diubah..
 														</div>');
 
-		// mengalihkan halaman ke halaman data produk
+		echo $id_produk.$nama;
+		// mengalihkan halaman ke halaman data anggota
 		redirect(base_url().'admin/produk');
+
 	}
 
 

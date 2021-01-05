@@ -19,7 +19,7 @@
           } 
           ?>
 
-      <form method="post" action="<?php echo base_url().'admin/produk_tambah_aksi'; ?>"enctype="multipart/form-data">
+      <form method="post" action="<?php echo base_url().'admin/produk_tambah_aksi'; ?>" enctype="multipart/form-data">
         <div class="form-group">
           <label class="font-weight-bold" for="nama">Nama Produk</label>
           <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama produk" required="required">
