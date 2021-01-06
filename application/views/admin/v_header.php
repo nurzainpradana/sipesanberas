@@ -45,13 +45,7 @@
             <a class="nav-link" href="<?php echo base_url().'admin/pemesanan'; ?>"><i class="fa fa-book"></i> Pemesanan</a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url().'admin/pemesanan_laporan'; ?>"><i class="fa fa-clipboard"></i>Laporan</a>
-          </li>
           
-          <li class="nav-item">
-            <a href="<?php echo base_url().'admin/ganti_password' ?>" class="nav-link"><i class="fa fa-lock"></i> Ganti Password</a>
-          </li>
         </ul>
 
         <span class="navbar-text mr-3 text-center">

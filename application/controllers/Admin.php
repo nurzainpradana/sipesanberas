@@ -185,7 +185,17 @@ class Admin extends CI_Controller {
 	function pemesanan(){
 		// mengambil data dari database
 		// $data['pemesanan'] = $this->db->query("select pemesanan.* ,produk.judul_produk, anggota.nm_anggota from pemesanan join produk on pemesanan.id_produk=produk.id_produk join anggota on pemesanan.id_anggota=anggota.id_anggota order by id_pemesanan desc")->result();
+		if(isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])){
+			$mulai = $this->input->get('tanggal_mulai');
+			$sampai = $this->input->get('tanggal_sampai');
+			//mengambil data pemesanan berdasarkan tanggal mulai sampai tanggal sampai
+			$data['pemesanan'] = $this->m_data->get_data_where('tb_pemesanan',"'tgl_pemesanan' >= '".$mulai."' and 'tgl_pemesanan' <= '".$sampai."'")->result();	
+		}else{
+			//mengambil data pemesanan produk dari database | dan mengurutkan data dari id pemesanan terbesar ke terkecil (desc)
+			
 		$data['pemesanan'] = $this->m_data->get_data('tb_pemesanan')->result();
+		}
+		
 		$this->load->view('admin/v_header');
 		$this->load->view('admin/v_pemesanan',$data);
 		$this->load->view('admin/v_footer');
@@ -216,7 +226,7 @@ class Admin extends CI_Controller {
 		$data = array(
 			'status' => $status,
 		);
-		echo $id_pemesanan;
+		
 	
         if (!empty($_FILES['bukti_pembayaran']['name'])) {
             $image = $this->_do_upload_2($id_pemesanan);
@@ -239,7 +249,7 @@ class Admin extends CI_Controller {
 
 		
 		// mengalihkan halaman ke halaman data anggota
-		//redirect(base_url().'admin/pemesanan');
+		redirect(base_url().'admin/pemesanan');
 
 	}
 
@@ -347,30 +357,47 @@ if($this->form_validation->run() == false){
 
 	// pemesanan
 	function pemesanan_laporan(){
-		if(isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])){
+		if($_GET['tanggal_mulai']!=null&& $_GET['tanggal_sampai']!=null){
 			$mulai = $this->input->get('tanggal_mulai');
 			$sampai = $this->input->get('tanggal_sampai');
 			//mengambil data pemesanan berdasarkan tanggal mulai sampai tanggal sampai
-			$data['pemesanan'] = $this->db->query("select * from pemesanan,produk,anggota, pengembalian where pemesanan.id_produk=produk.id_produk and pemesanan.id_anggota=anggota.id_anggota and pemesanan.id_pemesanan=pengembalian.id_pemesanan and date(tgl_pemesanan) >= '$mulai' and date(tgl_pemesanan) <= '$sampai' order by pemesanan.id_pemesanan desc")->result();	
+			$data['pemesanan'] = $this->db->query("select * from tb_pemesanan where tgl_pemesanan >= '".$mulai."' and tgl_pemesanan <= '".date($sampai)."'")->result();
+		
 		}else{
 			//mengambil data pemesanan produk dari database | dan mengurutkan data dari id pemesanan terbesar ke terkecil (desc)
-			$data['pemesanan'] = $this->db->query("select * from pemesanan,produk,anggota, pengembalian where pemesanan.id_produk=produk.id_produk and pemesanan.id_anggota=anggota.id_anggota and pemesanan.id_pemesanan=pengembalian.id_pemesanan order by pemesanan.id_pemesanan desc")->result();	
+			$data['pemesanan'] = $this->db->get_pemesanan('tb_pemesanan');	
 		}
 		$this->load->view('admin/v_header');
-		$this->load->view('admin/v_pemesanan_laporan',$data);
+		$this->load->view('admin/v_pemesanan',$data);
+		$this->load->view('admin/v_footer');
+	}
+	function pemesanan_laporan_cetak(){
+		if($_GET['tanggal_mulai']!=null&& $_GET['tanggal_sampai']!=null){
+			$mulai = $this->input->get('tanggal_mulai');
+			$sampai = $this->input->get('tanggal_sampai');
+			//mengambil data pemesanan berdasarkan tanggal mulai sampai tanggal sampai
+			$data['pemesanan'] = $this->db->query("select * from tb_pemesanan where tgl_pemesanan >= '".$mulai."' and tgl_pemesanan <= '".date($sampai)."'")->result();
+		
+		}else{
+			//mengambil data pemesanan produk dari database | dan mengurutkan data dari id pemesanan terbesar ke terkecil (desc)
+			$data['pemesanan'] = $this->db->get_pemesanan('tb_pemesanan');	
+		}
+		$this->load->view('admin/v_header');
+		$this->load->view('admin/v_pemesanan_laporan_cetak',$data);
 		$this->load->view('admin/v_footer');
 	}
 
-	function pemesanan_cetak(){
-		if(isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])){
-			$mulai = $this->input->get('tanggal_mulai');
-			$sampai = $this->input->get('tanggal_sampai');
-			//mengambil data pemesanan berdasarkan tanggal mulai sampai tanggal sampai
-			$data['pemesanan'] = $this->db->query("select * from pemesanan,produk,anggota, pengembalian where pemesanan.id_produk=produk.id_produk and pemesanan.id_anggota=anggota.id_anggota and pemesanan.id_pemesanan=pengembalian.id_pemesanan and date(tgl_pemesanan) >= '$mulai' and date(tgl_pemesanan) <= '$sampai' order by pemesanan.id_pemesanan desc")->result();	
-			$this->load->view('admin/v_pemesanan_cetak',$data);
-		}else{
-			redirect(base_url().'admin/pemesanan');
-		}
+	function pemesanan_cetak($id_pemesanan){
+		$where = array('id_pemesanan' => $id_pemesanan);
+		// mengambil data dari database sesuai id
+		
+		$data['detail_pemesanan'] = $this->m_data->get_pemesanan_detail($id_pemesanan);
+		$data['id_pemesanan'] = $id_pemesanan;
+		$data['pemesanan'] = $this->m_data->get_pemesanan_admin($id_pemesanan);
+		
+		$this->load->view('admin/v_header');
+		$this->load->view('admin/v_pemesanan_cetak',$data);
+		$this->load->view('admin/v_footer');
 	}
 	// akhir pemesanan
 

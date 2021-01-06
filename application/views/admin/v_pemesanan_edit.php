@@ -43,7 +43,7 @@
                 <option value="Verifikasi Pembayaran" <?= ($b->status)=="Verifikasi Pembayaran"? "selected" : ""?>>Verifikasi Pembayaran</option>
                 <option value="Pengiriman" <?= ($b->status)=="Pengiriman"? "selected" : ""?>>Pengiriman</option>
                 <option value="Selesai" <?= ($b->status)=="Selesai"? "selected" : ""?>>Selesai</option>
-                <option value="Dibatalkan" <?= ($b->status)=="Dibatalkan"? "selected" : ""?>>Dibatalkan</option>
+                <option value="Dibatalkan" <?= ($b->status)=="Menunggu Pembayaran"? "selected" : ""?>>Dibatalkan</option>
             </select>
           </div>
            
@@ -58,10 +58,11 @@
             <input type="file" class="form-control" name="bukti_pembayaran" placeholder="Masukkan Bukti Pembayaran">
           </div>
 
-          <?php } ?>
+          
 
           <input type="submit" class="btn btn-primary" value="Simpan">
-          
+          <a href="<?php echo base_url().'admin/pemesanan_cetak/'.$b->id_pemesanan; ?>" class="btn btn-md btn-warning">Cetak </a>
+          <?php } ?>
           </form>
 
       <div class="table-responsive mt-3">

@@ -4,7 +4,34 @@
       <h4>Data Pemesanan</h4>
     </div>
     <div class="card-body">
-    
+    <form method="get" action="<?=base_url().'admin/pemesanan_laporan'?>">
+                <div class="form-group">
+                  <label class="font-weight-bold" for="tanggal_mulai">Tanggal Mulai Pinjam</label>
+                  <input type="date" class="form-control" name="tanggal_mulai" placeholder="Masukkan tanggal mulai pinjam">
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="tanggal_sampai">Tanggal Pinjam Sampai</label>
+                  <input type="date" class="form-control" name="tanggal_sampai" placeholder="Masukkan tanggal pinjam sampai">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Filter">
+                </form>
+                
+                <?php 
+      // membuat tombol cetak jika data sudah di filter
+      if(isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])){
+        $mulai = $_GET['tanggal_mulai'];
+        $sampai = $_GET['tanggal_sampai'];
+        ?>
+        <div>
+            <br>
+              <a href="<?php echo base_url().'admin/pemesanan_laporan_cetak?tanggal_mulai='.$mulai.'&tanggal_sampai='.$sampai; ?>" class="btn btn-md btn-warning">Cetak Laporan</a>
+         </div>  
+        <?php
+
+      }
+        ?>
+           
+
      <div class="text-center">
      <?php echo $this->session->flashdata('message'); ?>
      <br/>
@@ -45,7 +72,6 @@
               </div>
               <td>
                       <a href="<?php echo base_url().'admin/pemesanan_edit/'.$p->id_pemesanan; ?>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> </a>
-                      <a href="<?php echo base_url().'admin/pemesanan_hapus/'.$p->id_pemesanan; ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </a>
                 </td>
             </tr>
             <?php 
