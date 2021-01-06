@@ -153,6 +153,11 @@ class Admin extends CI_Controller {
 
 	}
 
+	function produk_hapus($id_produk){
+		$this->m_data->delete_data("id_produk='".$id_produk."'",'tb_produk');
+		redirect(base_url().'admin/produk?alert=2');
+	}
+
 
 	// CRUD petugas
 	function pembeli(){
@@ -177,61 +182,99 @@ class Admin extends CI_Controller {
 		redirect(base_url().'admin/pembeli?alert=2');
 	}
 	// produk
-	function peminjaman(){
+	function pemesanan(){
 		// mengambil data dari database
-		$data['peminjaman'] = $this->db->query("select peminjaman.* ,produk.judul_produk, anggota.nm_anggota from peminjaman join produk on peminjaman.id_produk=produk.id_produk join anggota on peminjaman.id_anggota=anggota.id_anggota order by id_peminjaman desc")->result();
-		// $data['peminjaman'] = $this->m_data->get_data('peminjaman')->result();
+		// $data['pemesanan'] = $this->db->query("select pemesanan.* ,produk.judul_produk, anggota.nm_anggota from pemesanan join produk on pemesanan.id_produk=produk.id_produk join anggota on pemesanan.id_anggota=anggota.id_anggota order by id_pemesanan desc")->result();
+		$data['pemesanan'] = $this->m_data->get_data('tb_pemesanan')->result();
 		$this->load->view('admin/v_header');
-		$this->load->view('admin/v_peminjaman',$data);
+		$this->load->view('admin/v_pemesanan',$data);
 		$this->load->view('admin/v_footer');
 	}
 
-	function peminjaman_tambah(){
-		// mengambil data produk yang berstatus 1 (tersedia) dari database
-		$where = array('status'=>1);
-		// $data['produk'] = $this->m_data->edit_data($where,'produk')->result();
-		$data['produk'] = $this->db->get('produk')->result_array();
-		// mengambil data anggota dari database
-		// $data['anggota'] = $this->m_data->get_data('anggota')->result();
-		$data['anggota'] = $this->db->get('anggota')->result_array();
+	function pemesanan_edit($id_pemesanan){
+		$where = array('id_pemesanan' => $id_pemesanan);
+		// mengambil data dari database sesuai id
+		
+		$data['detail_pemesanan'] = $this->m_data->get_pemesanan_detail($id_pemesanan);
+		$data['id_pemesanan'] = $id_pemesanan;
+		$data['pemesanan'] = $this->m_data->get_pemesanan_admin($id_pemesanan);
 		
 		$this->load->view('admin/v_header');
-		$this->load->view('admin/v_peminjaman_tambah',$data);
+		$this->load->view('admin/v_pemesanan_edit',$data);
 		$this->load->view('admin/v_footer');
 	}
 
-	function peminjaman_tambah_aksi(){
+	function pemesanan_update(){
+		$id_pemesanan = $this->input->post('id_pemesanan');
+		$status = $this->input->post('status');
+		$bukti_pembayaran_lama = $this->input->post('bukti_pembayaran_lama');
+		$bukti_pembayaran = $this->input->post('bukti_pembayaran');
+
+		if ($bukti_pembayaran == null){
+			$bukti_pembayaran = $bukti_pembayaran_lama;
+		}
+		$data = array(
+			'status' => $status,
+		);
+		echo $id_pemesanan;
+	
+        if (!empty($_FILES['bukti_pembayaran']['name'])) {
+            $image = $this->_do_upload_2($id_pemesanan);
+            $data['bukti_pembayaran'] = $image;
+        } else {
+			$data['bukti_pembayaran'] = $bukti_pembayaran_lama;
+		}
+
+
+		$where = array(
+			'id_pemesanan' => $id_pemesanan
+		);
+        
+		// insert data ke database
+		$this->m_data->update_data($where, $data,'tb_pemesanan');
+
+		$this->session->set_flashdata('message','<div class="alert alert-primary" role="alert">
+														 Produk Berhasil Diubah..
+														</div>');
+
+		
+		// mengalihkan halaman ke halaman data anggota
+		//redirect(base_url().'admin/pemesanan');
+
+	}
+
+	function pemesanan_tambah_aksi(){
 		$id_produk = $this->input->post('id_produk');
 		$id_anggota = $this->input->post('id_anggota');
-		$tgl_peminjaman = $this->input->post('tgl_peminjaman');
+		$tgl_pemesanan = $this->input->post('tgl_pemesanan');
 		$tgl_bataspengembalian = $this->input->post('tgl_bataspengembalian');
-		$jml_peminjaman = $this->input->post('jml_peminjaman');
+		$jml_pemesanan = $this->input->post('jml_pemesanan');
 
 
 		$data = array(
 			'id_produk' => $id_produk,
 			'id_anggota' => $id_anggota,
-			'tgl_peminjaman' => $tgl_peminjaman,
+			'tgl_pemesanan' => $tgl_pemesanan,
 			'tgl_bataspengembalian' => $tgl_bataspengembalian,
-			'jml_peminjaman' => $jml_peminjaman
+			'jml_pemesanan' => $jml_pemesanan
 
 		);
 
-		// $this->db->query("UPDATE produk SET produk.stock= produk.stock - $jml_peminjaman where produk.id_produk=$id_produk");
+		// $this->db->query("UPDATE produk SET produk.stock= produk.stock - $jml_pemesanan where produk.id_produk=$id_produk");
 
 		// insert data ke database
-		$this->m_data->insert_data($data,'peminjaman');
+		$this->m_data->insert_data($data,'pemesanan');
 
 		$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> 
-												Peminjaman Berhasil Ditambah.. </div>');
+												Pemesanan Berhasil Ditambah.. </div>');
 
 
 		// mengalihkan halaman ke halaman data anggota
 		redirect(base_url().'admin/pengembalian');
 	}
 
-	function peminjaman_batalkan($id_peminjaman, $id_produk){
-		$this->db->delete('peminjaman',['id_peminjaman'=>$id_peminjaman]);
+	function pemesanan_batalkan($id_pemesanan, $id_produk){
+		$this->db->delete('pemesanan',['id_pemesanan'=>$id_pemesanan]);
 		
 			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> 
 												Berhasil menghapus data ! </div>');
@@ -243,21 +286,21 @@ class Admin extends CI_Controller {
 	// produk
 	function pengembalian(){
 		// mengambil data dari database
-		$data['peminjaman'] = $this->db->query("select peminjaman.* ,produk.judul_produk, anggota.nm_anggota, pengembalian.kondisi_produk from peminjaman join produk on peminjaman.id_produk=produk.id_produk join anggota on peminjaman.id_anggota=anggota.id_anggota left join pengembalian on peminjaman.id_peminjaman=pengembalian.id_peminjaman order by id_peminjaman desc")->result();
-		// $data['peminjaman'] = $this->m_data->get_data('peminjaman')->result();
+		$data['pemesanan'] = $this->db->query("select pemesanan.* ,produk.judul_produk, anggota.nm_anggota, pengembalian.kondisi_produk from pemesanan join produk on pemesanan.id_produk=produk.id_produk join anggota on pemesanan.id_anggota=anggota.id_anggota left join pengembalian on pemesanan.id_pemesanan=pengembalian.id_pemesanan order by id_pemesanan desc")->result();
+		// $data['pemesanan'] = $this->m_data->get_data('pemesanan')->result();
 		$this->load->view('admin/v_header');
 		$this->load->view('admin/v_pengembalian',$data);
 		$this->load->view('admin/v_footer');
 	}
 
-	function pengembalian_aksi($id_peminjaman){
-		$data['id_peminjaman1'] = $id_peminjaman;
-		$data['peminjaman'] = $this->m_data->c_peminjaman($id_peminjaman);
+	function pengembalian_aksi($id_pemesanan){
+		$data['id_pemesanan1'] = $id_pemesanan;
+		$data['pemesanan'] = $this->m_data->c_pemesanan($id_pemesanan);
 		
 
 		
 
-		$this->form_validation->set_rules('id_peminjaman', 'id_peminjaman', 'required');
+		$this->form_validation->set_rules('id_pemesanan', 'id_pemesanan', 'required');
 if($this->form_validation->run() == false){
 		$this->load->view('admin/v_header');
 		$this->load->view('admin/v_pengembalian_aksi',$data);
@@ -276,15 +319,15 @@ if($this->form_validation->run() == false){
               }
 
 		 $data = array(
-			'id_peminjaman' => $this->input->post('id_peminjaman'),
+			'id_pemesanan' => $this->input->post('id_pemesanan'),
 			'tgl_pengembalian' => $this->input->post('tgl_pengembalian'),
 			'kondisi_produk'=> $this->input->post('kondisi_produk'),
 			'denda' => $denda  	
 		);	  	
-		 // $this->db->query("UPDATE produk SET produk.stock= produk.stock + peminjaman.jml_peminjaman where produk.id_produk=$id_produk");    
+		 // $this->db->query("UPDATE produk SET produk.stock= produk.stock + pemesanan.jml_pemesanan where produk.id_produk=$id_produk");    
 		// insert data ke database
 		$this->m_data->insert_data($data,'pengembalian');
-		// $this->db->delete('peminjaman',['id_peminjaman'=>$id_peminjaman]);
+		// $this->db->delete('pemesanan',['id_pemesanan'=>$id_pemesanan]);
 
 		// mengalihkan halaman ke halaman data anggota
 		redirect(base_url().'admin/pengembalian');
@@ -302,34 +345,34 @@ if($this->form_validation->run() == false){
 	
 
 
-	// peminjaman
-	function peminjaman_laporan(){
+	// pemesanan
+	function pemesanan_laporan(){
 		if(isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])){
 			$mulai = $this->input->get('tanggal_mulai');
 			$sampai = $this->input->get('tanggal_sampai');
-			//mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
-			$data['peminjaman'] = $this->db->query("select * from peminjaman,produk,anggota, pengembalian where peminjaman.id_produk=produk.id_produk and peminjaman.id_anggota=anggota.id_anggota and peminjaman.id_peminjaman=pengembalian.id_peminjaman and date(tgl_peminjaman) >= '$mulai' and date(tgl_peminjaman) <= '$sampai' order by peminjaman.id_peminjaman desc")->result();	
+			//mengambil data pemesanan berdasarkan tanggal mulai sampai tanggal sampai
+			$data['pemesanan'] = $this->db->query("select * from pemesanan,produk,anggota, pengembalian where pemesanan.id_produk=produk.id_produk and pemesanan.id_anggota=anggota.id_anggota and pemesanan.id_pemesanan=pengembalian.id_pemesanan and date(tgl_pemesanan) >= '$mulai' and date(tgl_pemesanan) <= '$sampai' order by pemesanan.id_pemesanan desc")->result();	
 		}else{
-			//mengambil data peminjaman produk dari database | dan mengurutkan data dari id peminjaman terbesar ke terkecil (desc)
-			$data['peminjaman'] = $this->db->query("select * from peminjaman,produk,anggota, pengembalian where peminjaman.id_produk=produk.id_produk and peminjaman.id_anggota=anggota.id_anggota and peminjaman.id_peminjaman=pengembalian.id_peminjaman order by peminjaman.id_peminjaman desc")->result();	
+			//mengambil data pemesanan produk dari database | dan mengurutkan data dari id pemesanan terbesar ke terkecil (desc)
+			$data['pemesanan'] = $this->db->query("select * from pemesanan,produk,anggota, pengembalian where pemesanan.id_produk=produk.id_produk and pemesanan.id_anggota=anggota.id_anggota and pemesanan.id_pemesanan=pengembalian.id_pemesanan order by pemesanan.id_pemesanan desc")->result();	
 		}
 		$this->load->view('admin/v_header');
-		$this->load->view('admin/v_peminjaman_laporan',$data);
+		$this->load->view('admin/v_pemesanan_laporan',$data);
 		$this->load->view('admin/v_footer');
 	}
 
-	function peminjaman_cetak(){
+	function pemesanan_cetak(){
 		if(isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])){
 			$mulai = $this->input->get('tanggal_mulai');
 			$sampai = $this->input->get('tanggal_sampai');
-			//mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
-			$data['peminjaman'] = $this->db->query("select * from peminjaman,produk,anggota, pengembalian where peminjaman.id_produk=produk.id_produk and peminjaman.id_anggota=anggota.id_anggota and peminjaman.id_peminjaman=pengembalian.id_peminjaman and date(tgl_peminjaman) >= '$mulai' and date(tgl_peminjaman) <= '$sampai' order by peminjaman.id_peminjaman desc")->result();	
-			$this->load->view('admin/v_peminjaman_cetak',$data);
+			//mengambil data pemesanan berdasarkan tanggal mulai sampai tanggal sampai
+			$data['pemesanan'] = $this->db->query("select * from pemesanan,produk,anggota, pengembalian where pemesanan.id_produk=produk.id_produk and pemesanan.id_anggota=anggota.id_anggota and pemesanan.id_pemesanan=pengembalian.id_pemesanan and date(tgl_pemesanan) >= '$mulai' and date(tgl_pemesanan) <= '$sampai' order by pemesanan.id_pemesanan desc")->result();	
+			$this->load->view('admin/v_pemesanan_cetak',$data);
 		}else{
-			redirect(base_url().'admin/peminjaman');
+			redirect(base_url().'admin/pemesanan');
 		}
 	}
-	// akhir peminjaman
+	// akhir pemesanan
 
 	private function _do_upload($nama)
     {
@@ -343,6 +386,22 @@ if($this->form_validation->run() == false){
         if (!$this->upload->do_upload('gambar')) {
             $this->session->set_flashdata('msg', $this->upload->display_errors('', ''));
             redirect(base_url().'admin/produk_tambah?alert=1');
+        }
+        return $this->upload->data('file_name');
+	}
+	
+	private function _do_upload_2($nama)
+    {
+        $image_name = time().'_'.$nama;
+
+        $config['upload_path'] 		= 'assets/images/bukti_pembayaran/';
+        $config['allowed_types'] 	= 'gif|jpg|png|jpeg';
+        $config['file_name'] 		= $image_name;
+
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('bukti_pembayaran')) {
+            $this->session->set_flashdata('msg', $this->upload->display_errors('', ''));
+            //redirect(base_url().'admin/pemesanan_edit?alert=1');
         }
         return $this->upload->data('file_name');
     }

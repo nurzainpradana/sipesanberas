@@ -9,7 +9,7 @@
           if(isset($_GET['alert'])){
             if($_GET['alert']=="1"){
               echo "<div class='alert alert-success font-weight-bold text-center'>Produk Berhasil Ditambah</div>";
-            }else if($_GET['alert']=="belum_login"){
+            }else if($_GET['alert']=="2"){
               echo "<div class='alert alert-success font-weight-bold text-center'>Produk Berhasil Dihapus</div>";
             }else if($_GET['alert']=="logout"){
               echo "<div class='alert alert-success font-weight-bold text-center'>ANDA TELAH LOGOUT!</div>";

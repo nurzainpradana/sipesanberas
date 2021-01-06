@@ -113,6 +113,11 @@ class M_data extends CI_Model{
         return $this->db->query($query)->result();
 	}
 
+	function get_pemesanan_admin($id_pemesanan){
+		$query = "SELECT * FROM tb_pemesanan as p JOIN tb_pembeli as pb ON p.id_pembeli = pb.id_pembeli WHERE id_pemesanan ='".$id_pemesanan."'";
+        return $this->db->query($query)->result();
+	}
+
 	// GET LAST ID
 	function get_last_id($selected_id, $table_name, $id_pembeli) {
 		$query = $this->db->query("SELECT MAX(".$selected_id.") as last_id FROM ".$table_name." where id_pembeli ='".$id_pembeli."'");

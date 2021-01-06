@@ -10,8 +10,6 @@
       
       <?php echo $this->session->flashdata('message'); ?>
     </div>
-      <a href="<?php echo base_url().'admin/produk_tambah' ?>" class='btn btn-sm btn-primary pull-left'>
-      <i class="fa fa-plus"></i> produk Baru</a>
       <br/>
       <br/>
       <?php 
